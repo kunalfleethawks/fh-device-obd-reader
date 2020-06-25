@@ -1,2 +1,4 @@
-# fh-device-obd-reader
-OBD reader on device
+# Device OBD Reader - Lambda
+
+
+This lambda is used by AWS IOT to deploye it on ELD device
