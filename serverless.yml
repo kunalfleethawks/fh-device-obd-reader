@@ -1,0 +1,23 @@
+
+
+service: fh-device-gps-reader
+
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: ${opt:region, 'us-east-2'}
+  stage: ${opt:stage, 'dev'}
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+  
+package:
+  excludeDevDependencies: true
+  include:
+    - node_modules/aws-greengrass-core-sdk/**
+    - node_modules/serial-obd/**
+
+
+functions:
+  execute:
+    handler: handler.execute

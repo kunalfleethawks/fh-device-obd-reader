@@ -1,0 +1,21 @@
+{
+  "name": "fh-device-obd-reader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Gagandeep Singh - Fleet Hawks",
+  "license": "ISC",
+  "dependencies": {
+    "aws-greengrass-core-sdk": "file:aws-greengrass-core-sdk-1.6.1.tgz",
+    "cbor": "5.0.1",
+    "serial-obd": "file:serial-obd-0.2.2.tgz",
+    "serialport": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/aws-greengrass-core-sdk": "^1.6.0"
+  }
+}
