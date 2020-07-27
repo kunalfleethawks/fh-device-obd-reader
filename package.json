@@ -12,6 +12,7 @@
   "dependencies": {
     "aws-greengrass-core-sdk": "file:aws-greengrass-core-sdk-1.6.1.tgz",
     "cbor": "5.0.1",
+    "mqtt": "^4.1.0",
     "serial-obd": "file:serial-obd-0.2.2.tgz",
     "serialport": "^9.0.0"
   },

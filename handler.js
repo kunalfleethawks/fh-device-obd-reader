@@ -2,6 +2,10 @@
  * Copyright 2010-2018 FleetHawks.com, Inc. or its affiliates. All Rights Reserved.
  */
 const ggSdk = require("aws-greengrass-core-sdk");
+
+var mqtt = require('mqtt')
+localMqttClient = mqtt.connect('mqtt://localhost')
+
 const iotClient = new ggSdk.IotData();
 const OBDReader = require("serial-obd");
 const OBD_PORT = process.env.SERIAL_PORT || "/dev/ttyUSB0";
@@ -11,6 +15,14 @@ const obdData = undefined;
 const obdPolling = process.env.POLLING_RATE || 15000;
 const staticTopicName = "quantum/telemetry/obd";
 const realTimeTopicName = getRealTimeTopicName();
+
+localMqttClient.on('connect', () => {
+  localMqttClient.subscribe('#', function (err) {
+    if (!err) {
+      console.log('local mqtt connection successfull');
+    }
+  })
+})
 
 serialOBDReader.on("dataReceived", function (data) {
   // console.log(data);
@@ -34,6 +46,7 @@ serialOBDReader.on("dataReceived", function (data) {
       payload: JSON.stringify(obdData),
       queueFullPolicy: "AllOrError",
     };
+    localMqttClient.publish('hw/obd/status', JSON.stringify(obdData));
     iotClient.publish(pubOpt, publishCallback);
   }
 });
